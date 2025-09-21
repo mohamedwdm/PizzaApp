@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:pizza_app/features/auth/models/user_model.dart';
 
 part 'auth_state.dart';
 
@@ -12,7 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
     required String name,
-    required String phone,
+    required bool hasActiveCart,
   }) async {
     emit(RegisterLoading());
     try {
@@ -27,10 +28,10 @@ class AuthCubit extends Cubit<AuthState> {
       // Step 2: Save user profile in Firestore
       if (user != null) {
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'uid': user.uid,
+          'userid': user.uid,
           'name': name,
           'email': email,
-          'phone': phone,
+          'hasActiveCart': hasActiveCart,
           'createdAt': FieldValue.serverTimestamp(),
         });
       }
@@ -48,7 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> LoginUser({required String email, required String password}) async {
+  Future<UserModel?> LoginUser({required String email, required String password}) async {
     emit(LoginLoading());
     try {
       // Step 1: Sign in with Firebase Auth
@@ -69,6 +70,7 @@ class AuthCubit extends Cubit<AuthState> {
         if (userDoc.exists) {
           print("📂 User profile: ${userDoc.data()}");
           emit(LoginLoading());
+          return UserModel.fromJson(userDoc.data()!);
         } else {
           print("⚠️ No profile found in Firestore!");
         }
@@ -82,5 +84,9 @@ class AuthCubit extends Cubit<AuthState> {
     } on Exception catch (e) {
       emit(LoginFailure(errorMessege: "Something went wrong"));
     }
+  }
+
+  Future<void> LogOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
