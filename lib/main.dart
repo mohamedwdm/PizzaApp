@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/features/auth/presentation/views/login_view.dart';
 import 'package:pizza_app/firebase_options.dart';
 import 'package:pizza_app/simple_bloc_observer.dart';
 
@@ -16,6 +17,18 @@ class PizzaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: Scaffold());
+    return MaterialApp(
+      title: "pizza delivery",
+      theme: ThemeData(
+        colorScheme: ColorScheme.light(
+          surface: Colors.grey.shade100,
+          onSurface: Colors.black,
+          primary: Colors.blue,
+          onPrimary: Colors.white
+        )
+      ),
+      home: LoginView(),
+      
+      );
   }
 }
