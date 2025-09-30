@@ -1,15 +1,16 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meta/meta.dart';
-import 'package:pizza_app/features/auth/models/user_model.dart';
+import 'package:pizza_app/features/auth/data/models/user_model.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  Future<void> RegisterUser({
+  Future<void> registerUser({
     required String email,
     required String password,
     required String name,
@@ -18,10 +19,8 @@ class AuthCubit extends Cubit<AuthState> {
     emit(RegisterLoading());
     try {
       // Step 1: Create account in Firebase Auth
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
       User? user = userCredential.user;
 
@@ -36,57 +35,69 @@ class AuthCubit extends Cubit<AuthState> {
         });
       }
 
-      print("✅ User registered & profile saved!");
+      log("✅ User registered & profile saved!");
       emit(RegisterSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        emit(RegisterFailure(errorMessege: "The password provided is too weak."));
+        emit(
+          RegisterFailure(errorMessege: "The password provided is too weak."),
+        );
       } else if (e.code == 'email-already-in-use') {
-        emit(RegisterFailure(errorMessege: 'The account already exists for that email.'));
+        emit(
+          RegisterFailure(
+            errorMessege: 'The account already exists for that email.',
+          ),
+        );
       }
     } on Exception catch (e) {
       emit(RegisterFailure(errorMessege: "Something went wrong"));
     }
   }
 
-  Future<UserModel?> LoginUser({required String email, required String password}) async {
+  Future<void> loginUser({
+    required String email,
+    required String password,
+  }) async {
     emit(LoginLoading());
     try {
       // Step 1: Sign in with Firebase Auth
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
       User? user = userCredential.user;
 
       if (user != null) {
-        print("✅ Signed in as: ${user.email}");
+        log("✅ Signed in as: ${user.email}");
 
         // Step 2: Get user profile from Firestore (optional)
         DocumentSnapshot userDoc =
-            await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(user.uid)
+                .get();
 
+        emit(LoginLoading());
         if (userDoc.exists) {
-          print("📂 User profile: ${userDoc.data()}");
-          emit(LoginLoading());
-          return UserModel.fromJson(userDoc.data()!);
+          log("📂 User profile: ${userDoc.data()}");
+          emit(LoginSuccess(user: UserModel.fromJson(userDoc)));
         } else {
-          print("⚠️ No profile found in Firestore!");
+          log("⚠️ No profile found in Firestore!");
         }
       }
     } on FirebaseAuthException catch (ex) {
       if (ex.code == 'user-not-found') {
         emit(LoginFailure(errorMessege: "No user found for that email"));
       } else if (ex.code == 'wrong-password') {
-        emit(LoginFailure(errorMessege: 'Wrong password provided for that user.'));
+        emit(
+          LoginFailure(errorMessege: 'Wrong password provided for that user.'),
+        );
       }
     } on Exception catch (e) {
       emit(LoginFailure(errorMessege: "Something went wrong"));
     }
   }
 
-  Future<void> LogOut() async {
+  Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }
