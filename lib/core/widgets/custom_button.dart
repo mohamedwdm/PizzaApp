@@ -8,7 +8,9 @@ class CustomButton extends StatelessWidget {
     required this.textcolor,
     this.borderRadius,
     required this.text,
-    this.fontsize, this.onPressed,
+    this.fontsize,
+    this.onPressed,
+    this.isLoading = false,
   });
 
   final Color backgroundcolor;
@@ -17,6 +19,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final double? fontsize;
   final void Function()? onPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +33,21 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: Styles.textStyle16.copyWith(
-            color: textcolor,
-            fontWeight: FontWeight.w700,
-            fontSize: fontsize,
-          ),
-        ),
+        child:
+            isLoading
+                ? const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(color: Colors.white),
+                )
+                : Text(
+                  text,
+                  style: Styles.textStyle16.copyWith(
+                    color: textcolor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: fontsize,
+                  ),
+                ),
       ),
     );
   }
