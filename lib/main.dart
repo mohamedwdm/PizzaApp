@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pizza_app/constants.dart';
 import 'package:pizza_app/features/auth/data/models/repos/user_repo_impl.dart';
 import 'package:pizza_app/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:pizza_app/features/auth/presentation/views/login_view.dart';
@@ -22,10 +23,11 @@ class PizzaApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCubit(UserRepoImpl()),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "pizza delivery",
         theme: ThemeData(
           colorScheme: ColorScheme.light(
-            surface: Colors.grey.shade100,
+            surface: kPrimaryColor,
             onSurface: Colors.black,
             primary: Colors.blue,
             onPrimary: Colors.white,
