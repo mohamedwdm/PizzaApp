@@ -33,7 +33,7 @@ class PizzaApp extends StatelessWidget {
             onPrimary: Colors.white,
           ),
         ),
-        home: LoginView(),
+        home: const LoginView(),
       ),
     );
   }
