@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -14,7 +15,7 @@ class HomeViewBody extends StatelessWidget {
           crossAxisSpacing: 16,
           childAspectRatio: 9 / 16,
         ),
-        itemCount: 4,
+        itemCount: 12,
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(
@@ -29,30 +30,37 @@ class HomeViewBody extends StatelessWidget {
               ],
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset('assets/images/1.png'),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Row(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0 , vertical: 4),
-                          child: const Text(
-                            'NON-VEG',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
+                      CustomPizzaItemLabel(
+                        color: Colors.red.shade800,
+                        text: 'NON-VEG',
+                      ),
+                      const SizedBox(width: 8),
+                      const CustomPizzaItemLabel(
+                        color: Colors.green,
+                        text: 'BALANCE',
                       ),
                     ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Text(
+                    'Chessy Marvel',
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Text(
+                    'Crafting joy: your pizza, your rules, best taster',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                   ),
                 ),
               ],
