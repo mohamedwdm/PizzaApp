@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:pizza_app/features/auth/data/models/repos/user_repo.dart';
+import 'package:pizza_app/features/auth/data/repos/user_repo.dart';
 import 'package:pizza_app/features/auth/data/models/user_model.dart';
 
 part 'auth_state.dart';

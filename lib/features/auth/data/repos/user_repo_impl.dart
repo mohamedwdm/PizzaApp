@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pizza_app/core/errors/failure.dart';
-import 'package:pizza_app/features/auth/data/models/repos/user_repo.dart';
+import 'package:pizza_app/features/auth/data/repos/user_repo.dart';
 import 'package:pizza_app/features/auth/data/models/user_model.dart';
 
 class UserRepoImpl implements UserRepo {
