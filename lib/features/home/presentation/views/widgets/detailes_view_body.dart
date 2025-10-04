@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_app/core/widgets/custom_button.dart';
-import 'package:pizza_app/features/home/presentation/views/widgets/detailes_pizza_card_image.dart';
+import 'package:pizza_app/features/home/presentation/views/widgets/detailes_pizza_image_card.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/detailes_pizza_macro_row.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/detailes_pizza_title_with_price.dart';
 
@@ -13,7 +13,7 @@ class DetailesViewBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         children: [
-          const DetailesPizzaCardImage(),
+          const DetailesPizzaImageCard(),
           const SizedBox(height: 30),
           Container(
             decoration: BoxDecoration(
