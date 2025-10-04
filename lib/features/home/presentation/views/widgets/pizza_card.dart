@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/constants.dart';
 import 'package:pizza_app/features/home/presentation/views/detailes_view.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
 
@@ -78,7 +79,7 @@ class PizzaCard extends StatelessWidget {
                           '\$12.00',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.lightBlueAccent,
+                            color:kPriceColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
