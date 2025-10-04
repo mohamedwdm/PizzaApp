@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CustomPizzaItemLabel extends StatelessWidget {
@@ -6,10 +5,13 @@ class CustomPizzaItemLabel extends StatelessWidget {
     super.key,
     required this.color,
     required this.text,
+    required this.textColor, this.fontWeight,
   });
 
   final Color color;
   final String text;
+  final Color textColor;
+  final FontWeight? fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,9 @@ class CustomPizzaItemLabel extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
         child: Text(
           text,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+          style: TextStyle(
+            fontWeight: fontWeight,
+            color: textColor,
             fontSize: 10,
           ),
         ),
