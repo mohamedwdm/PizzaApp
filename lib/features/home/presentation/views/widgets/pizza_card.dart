@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pizza_app/constants.dart';
 import 'package:pizza_app/features/home/presentation/views/detailes_view.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
+import 'package:pizza_app/features/home/presentation/views/widgets/home_pizza_price_section.dart';
 
 class PizzaCard extends StatelessWidget {
   const PizzaCard({super.key});
@@ -68,40 +68,7 @@ class PizzaCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const Text(
-                          '\$12.00',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color:kPriceColor,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          '\$16.00',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey.shade700,
-                            fontWeight: FontWeight.w700,
-                            decoration: TextDecoration.lineThrough,
-                          ),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(CupertinoIcons.add_circled_solid),
-                    ),
-                  ],
-                ),
-              ),
+             HomePizzaPriceSection(),
             ],
           ),
         ),
