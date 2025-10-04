@@ -1,32 +1,37 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/features/home/presentation/views/detailes_view.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
 
 class PizzaCard extends StatelessWidget {
-  const PizzaCard({
-    super.key,
-  });
+  const PizzaCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 3,
       color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
-        onTap: (){},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const DetailesView();
+              },
+            ),
+          );
+        },
         child: SingleChildScrollView(
           child: Column(
-             mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset('assets/images/1.png'),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
                   children: [
                     CustomPizzaItemLabel(
@@ -36,7 +41,7 @@ class PizzaCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     const SizedBox(width: 8),
-                     CustomPizzaItemLabel(
+                    CustomPizzaItemLabel(
                       color: Colors.green.withValues(alpha: 0.2),
                       text: '🌶 BALANCE',
                       textColor: Colors.green,
@@ -45,16 +50,16 @@ class PizzaCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 2,),
+              const SizedBox(height: 2),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.0),
+                padding: EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
                   'Chessy Marvel',
                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
                   'Crafting joy: your pizza, your rules, best taster',
                   style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
@@ -63,7 +68,7 @@ class PizzaCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
