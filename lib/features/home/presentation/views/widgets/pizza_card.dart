@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pizza_app/features/home/data/models/pizza_model.dart';
 import 'package:pizza_app/features/home/presentation/views/detailes_view.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/home_pizza_price_section.dart';
 
 class PizzaCard extends StatelessWidget {
-  const PizzaCard({super.key});
+  const PizzaCard({super.key, required this.pizzaModel});
+
+  final PizzaModel pizzaModel;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class PizzaCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/1.png'),
+              Image.network(pizzaModel.picture),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(
@@ -52,23 +55,23 @@ class PizzaCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 2),
-              const Padding(
+               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
-                  'Chessy Marvel',
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                  pizzaModel.name,
+                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
-                  'Crafting joy: your pizza, your rules, best taster',
+                  pizzaModel.description,
                   style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-             HomePizzaPriceSection(),
+               HomePizzaPriceSection(pizzaModel: pizzaModel,),
             ],
           ),
         ),

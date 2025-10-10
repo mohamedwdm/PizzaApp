@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pizza_app/constants.dart';
+import 'package:pizza_app/features/home/data/models/pizza_model.dart';
 
 class HomePizzaPriceSection extends StatelessWidget {
-  const HomePizzaPriceSection({super.key});
+  const HomePizzaPriceSection({super.key, required this.pizzaModel});
 
+  final PizzaModel pizzaModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,9 +16,9 @@ class HomePizzaPriceSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
-                '\$12.00',
-                style: TextStyle(
+              Text(
+                '\$${pizzaModel.discount}',
+                style: const TextStyle(
                   fontSize: 16,
                   color: kPriceColor,
                   fontWeight: FontWeight.w700,
@@ -24,7 +26,7 @@ class HomePizzaPriceSection extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Text(
-                '\$16.00',
+                '\$${pizzaModel.price}',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade700,

@@ -1,16 +1,16 @@
 class PizzaModel {
-  final String pizzaId;
+  final int id;
   final String picture;
   final bool isVeg;
-  final int spicy;
+  final num spicy;
   final String name;
   final String description;
-  final double price;
-  final double discount;
-  final List<MacroModel> macros;
+  final num price;
+  final num discount;
+  final MacroModel macros;
 
   PizzaModel({
-    required this.pizzaId,
+    required this.id,
     required this.picture,
     required this.isVeg,
     required this.spicy,
@@ -23,23 +23,21 @@ class PizzaModel {
 
   factory PizzaModel.fromJson(Map<String, dynamic> json) {
     return PizzaModel(
-      pizzaId: json['pizzaId'],
+      id: json['id'],
       picture: json['picture'],
-      isVeg: json['isVeg'],
+      isVeg: json['is_veg'],
       spicy: json['spicy'],
       name: json['name'],
       description: json['description'],
-      price: (json['price'] as num).toDouble(),
-      discount: (json['discount'] as num).toDouble(),
-      macros: (json['macros'] as List<dynamic>)
-          .map((e) => MacroModel.fromJson(e))
-          .toList(),
+      price: (json['price'] ),
+      discount: (json['discount'] ),
+      macros: MacroModel.fromJson(json['macros']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'pizzaId': pizzaId,
+      'id': id,
       'picture': picture,
       'isVeg': isVeg,
       'spicy': spicy,
@@ -47,7 +45,7 @@ class PizzaModel {
       'description': description,
       'price': price,
       'discount': discount,
-      'macros': macros.map((e) => e.toJson()).toList(),
+      'macros': macros.toJson(),
     };
   }
 }
