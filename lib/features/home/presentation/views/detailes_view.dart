@@ -4,6 +4,7 @@ import 'package:pizza_app/features/home/presentation/views/widgets/detailes_view
 
 class DetailesView extends StatelessWidget {
   const DetailesView({super.key});
+  
 
   @override
   Widget build(BuildContext context) {

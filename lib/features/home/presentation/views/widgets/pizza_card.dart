@@ -39,27 +39,43 @@ class PizzaCard extends StatelessWidget {
                 child: Row(
                   children: [
                     CustomPizzaItemLabel(
-                      color: Colors.red.shade800,
-                      text: 'NON-VEG',
+                      color:
+                          pizzaModel.isVeg
+                              ? Colors.green.shade500
+                              : Colors.red.shade800,
+                      text: pizzaModel.isVeg ? 'VEG' : 'NON-VEG',
                       textColor: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                     const SizedBox(width: 8),
                     CustomPizzaItemLabel(
                       color: Colors.green.withValues(alpha: 0.2),
-                      text: '🌶 BALANCE',
-                      textColor: Colors.green,
+                      text:
+                          pizzaModel.spicy == 1
+                              ? '🌶 BLAND'
+                              : pizzaModel.spicy == 2
+                              ? '🌶 BALANCE'
+                              : '🌶 SPICEY',
+                      textColor:
+                          pizzaModel.spicy == 1
+                              ? Colors.green
+                              : pizzaModel.spicy == 2
+                              ? Colors.orange
+                              : Colors.redAccent,
                       fontWeight: FontWeight.w800,
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: 2),
-               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Text(
                   pizzaModel.name,
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               Padding(
@@ -71,7 +87,7 @@ class PizzaCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-               HomePizzaPriceSection(pizzaModel: pizzaModel,),
+              HomePizzaPriceSection(pizzaModel: pizzaModel),
             ],
           ),
         ),
