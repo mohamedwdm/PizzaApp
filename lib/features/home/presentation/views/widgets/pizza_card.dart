@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_app/features/home/data/models/pizza_model.dart';
 import 'package:pizza_app/features/home/presentation/views/detailes_view.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/custom_pizza_item_label.dart';
+import 'package:pizza_app/features/home/presentation/views/widgets/home_pizza_picture.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/home_pizza_price_section.dart';
 
 class PizzaCard extends StatelessWidget {
@@ -23,7 +24,7 @@ class PizzaCard extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const DetailesView();
+                return  DetailesView(pizzaModel: pizzaModel,);
               },
             ),
           );
@@ -33,7 +34,7 @@ class PizzaCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(pizzaModel.picture),
+              HomePizzaPicture(imageLink: pizzaModel.picture),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),
                 child: Row(

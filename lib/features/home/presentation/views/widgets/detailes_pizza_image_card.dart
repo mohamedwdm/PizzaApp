@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DetailesPizzaImageCard extends StatelessWidget {
-  const DetailesPizzaImageCard({super.key});
+  const DetailesPizzaImageCard({super.key, required this.imageLink});
+  final String imageLink;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class DetailesPizzaImageCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
-        image: const DecorationImage(image: AssetImage('assets/images/1.png')),
+        image:  DecorationImage(image: NetworkImage(imageLink)),
         boxShadow: [
           BoxShadow(
             offset: const Offset(3, 3),

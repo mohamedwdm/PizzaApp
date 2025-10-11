@@ -17,7 +17,7 @@ class HomePizzaPriceSection extends StatelessWidget {
           Row(
             children: [
               Text(
-                '\$${pizzaModel.discount}',
+                '\$${(pizzaModel.price - (pizzaModel.price *pizzaModel.discount / 100)).toStringAsFixed(2)}',
                 style: const TextStyle(
                   fontSize: 16,
                   color: kPriceColor,
@@ -26,7 +26,7 @@ class HomePizzaPriceSection extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Text(
-                '\$${pizzaModel.price}',
+                '\$${pizzaModel.price.toStringAsFixed(2)}',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade700,

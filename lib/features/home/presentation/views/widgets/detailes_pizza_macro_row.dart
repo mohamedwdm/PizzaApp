@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pizza_app/features/home/data/models/pizza_model.dart';
 import 'package:pizza_app/features/home/presentation/views/widgets/detailes_macro_widget.dart';
 
 class DetailesPizzaMacroRow extends StatelessWidget {
-  const DetailesPizzaMacroRow({super.key});
+  const DetailesPizzaMacroRow({super.key, required this.macros});
 
+  final MacroModel macros;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         DetailesMacroWidget(
-          value: 25,
+          value: macros.calories,
           title: 'Calories',
           icon: FontAwesomeIcons.fire,
         ),
-        SizedBox(width: 5),
+        const SizedBox(width: 5),
         DetailesMacroWidget(
-          value: 25,
+          value: macros.protein,
           title: 'Protein',
           icon: FontAwesomeIcons.dumbbell,
         ),
-        SizedBox(width: 5),
+        const SizedBox(width: 5),
         DetailesMacroWidget(
-          value: 20,
+          value: macros.fat,
           title: 'Fat',
           icon: FontAwesomeIcons.oilWell,
         ),
-        SizedBox(width: 5),
+        const SizedBox(width: 5),
         DetailesMacroWidget(
-          value: 265,
+          value: macros.carbs,
           title: 'Carb',
           icon: FontAwesomeIcons.breadSlice,
         ),
